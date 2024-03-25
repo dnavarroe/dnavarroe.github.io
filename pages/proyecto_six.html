@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/proyecto_one.css">
+    <link rel='shortcut icon' href="../Icons/icon.png">
+    <title>My Portfolio - Daniel Esteban Navarro Espinosa</title>
+</head>
+<body>
+    <header>
+        <div>
+            <div class="name">
+                <h1>Daniel Navarro</h1>
+                <p>Data Analyst</p>
+            </div>
+            <nav>
+                <ul>
+                    <li class="nav"><a class="navi" href="../index.html">Home</a></li>
+                    <li class="nav"><a class="navi" href="projects.html">Projects</a></li>
+                    <li class="nav"><a class="navi" href="about.html">About & Contact</a></li>
+                </ul>  
+            </nav>
+        </div>
+    </header>
+    <div class="cuerpo">
+        <div class="titulo">
+            <h1>Recommendation systems</h1>
+        </div>
+        <div class="subtitulo">
+            <h2>Description</h2>
+        </div>
+        <div class="descripcion">
+            <p>
+                An online book-selling platform aims to enhance user experience by providing personalized recommendations. They recognize the importance of offering relevant suggestions based on individual user tastes to increase customer satisfaction and encourage platform loyalty. They decide to develop a book recommendation system based on authors to achieve this goal.
+            </p>
+        </div>
+        <div class="subtitulo">
+            <h2>Problem Description</h2>
+        </div>
+        <div class="parrafo">
+            <p>
+                The main challenge is how to design an effective recommendation system that suggests books based on users' preferred authors. Choosing a specific author is often a strong indicator of an individual's literary interests. Therefore, the system should be able to analyze a user's reading history and recommend books written by similar or related authors.
+            </p>
+        </div>
+        <div class="subtitulo">
+            <h2>Available Data</h2>
+        </div>
+        <div class="parrafo">
+            <p>
+                <ul>
+                    <li><b>Reading History:</b>Information about the books each user has previously read, including authors and genres.</li>
+                    <br>
+                    <li><b>Book Catalog:</b>A database of books available on the platform, including detailed information about authors, genres, user ratings, etc.</li>
+                </ul>
+            </p>
+        </div>
+        <div class="subtitulo">
+            <h2>Objective</h2>
+        </div>
+        <div class="parrafo">
+            <P>
+                The main objective is to develop a recommendation system that suggests books likely to be enjoyed by a user based on their favorite authors. By providing accurate and personalized recommendations, the platform aims to increase user engagement and book sales.
+            </P>
+        </div>
+        <div class="subtitulo">
+            <h2>Expected Benefits</h2>
+        </div>
+        <div class="parrafo">
+            <p>
+                <ul>
+                    <li>Improvement in user experience by receiving personalized and relevant recommendations.</li>
+                    <br>
+                    <li>Increase in user engagement and retention on the platform.</li>
+                    <br>
+                    <li>Growth in book sales by effectively promoting specific titles.</li>
+                    <br>
+                    <li>Enhancement of brand perception as a platform that understands and addresses individual user needs.</li>
+                </ul>
+            </p>
+        </div>
+        <div class="subtitulo">
+            <h2>Importing the Dependencies</h2>
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo1.png">
+        </div>
+        <div class="subtitulo">
+            <h2>Cosine similarity</h2>
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo2.png">
+        </div>
+        <div class="parrafo">
+            <p>How to calculate it in Python? Suppose we have the following matrix:</p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo3.png">
+        </div>
+        <div class="parrafo">
+            <p>We can calculate the cosine similarity using sklearn:</p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo4.png">
+        </div>
+        <div class="parrafo">
+            <p>También podemos calcular la similitud a mano:</p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo5.png">
+        </div>
+        <div class="parrafo">
+            <p>Or using Numpy. Calculate cosine similarity using numpy (with np.dot and np.linalg.norm)</p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo6.png">
+        </div>
+        <div class="parrafo">
+            <p>Now when we have a real life user-item array, we have many missing cases. In this situation, we will not be able to calculate the cosine similarity so easily...</p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo7.png">
+        </div>
+        <div class="subtitulo">
+            <h2>Surprise</h2>
+        </div>
+        <div class="parrafo">
+            <p>
+                In this notebook we are going to use the surprise library. This is a library that is based on the scikit-learn API and allows you to implement several basic recommendation algorithms.
+                <br>
+                <br>
+                Let's start by loading a classic dataset in recommender systems: MovieLens (<a href="https://movielens.org/">https://movielens.org/</a>). This is a movie recommendation page that opened historical information.
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo8.png">
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo9.png">
+        </div>
+        <div class="parrafo">
+            <p>The surprise package does not directly receive a DataFrame object but rather has to parse and read a set of data through two new objects: Reader and Dataset. In Reader we must specify the minimum value and maximum value of the ratings and Dataset allows us to read data from different sources.</p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo10.png">
+        </div>
+        <div class="parrafo">
+            <p>Now load SVD and GridSearchCV, both from surprise. Note: GridSearchCV is not in surprise.GridSearchCV, surprise.GridSearch is deprecated.</p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo11.png">
+        </div>
+        <div class="parrafo">
+            <p>
+                Generate a parameter grid where different combinations of:
+                <br>
+                <ul>
+                    <li>epochs: is the number of passes over the dataset that the algorithm will make using gradient descent</li>
+                    <li>biased: use bias parameters or not</li>
+                    <li>lr_all: learning rate for all parameters</li>
+                    <li>reg_all: regularization term for all parameters (lambda)</li>
+                </ul>
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo12.png">
+        </div>
+        <div class="parrafo">
+            <p>
+                Use GridSearchCV, SVD, and the dictionary with the parameters to test, and train a model. Note that GridSearchCV needs to be passed an uninstantiated model. Also, set the refit parameter to True and with measures = ["rmse","fcp"]
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo13.png">
+        </div>
+        <div class="parrafo">
+            <p>
+                Print the rmse and fcp, and the best combination of parameters
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo14.png">
+        </div>
+        <div class="parrafo">
+            <p>
+                Save the model with the highest fcp and predict the rating for user id 196 and item id 242
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo15.png">
+        </div>
+        <div class="parrafo">
+            <p>
+                Try using other models like SVDpp, NMF, KNNWithZScore and try to beat the obtained value
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo16.png">
+        </div>
+        <div class="subtitulo">
+            <h2>Recommendation based on content</h2>
+        </div>
+        <div class="parrafo">
+            <p>
+                In this example we are going to take a corpus of texts by Latin American authors to suggest one similar to a given one. For this we will construct a TFIDF matrix, of normalized frequencies of terms per document, and we will use cosine similarity to measure distances between the different texts.
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo17.png">
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo18.png">
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo19.png">
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo20.png">
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo21.png">
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo22.png">
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo23.png">
+        </div>
+        <div class="parrafo">
+            <p>
+                We are going to calculate the term occurrence matrices using sklearn.
+                <br>
+                <br>
+                Both classes first build the total vocabulary, and then:
+                <ul>
+                    <li><b>CountVectorizer</b> returns the absolute frequency of each term for each document.</li>
+                    <li><b>TF-IDF:</b>calculates the frequency of each term per document, and normalizes by the total number of documents where the term appears.</li>
+                </ul>
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo24.png">
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo25.png">
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo26.png">
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo27.png">
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo28.png">
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo29.png">
+        </div>
+        <div class="photo">
+            <img src="../proyecto6/photo30.png">
+        </div>
+        <div class="subtitulo">
+            <h2>Download notebook: <a href="../archivos/sistemas_recomendacion.ipynb">sistemas_recomendacion.ipynb</a></h2>
+        </div>
+        <div class="subtitulo">
+            <a href="https://drive.google.com/file/d/1PES1rwmuHIfN4xCdkKMsVIyD7kPg80Il/view?usp=sharing"><h2>See notebook online</h2></a>
+        </div>
+
+    </div>
+    <footer>
+        <p>&copy; 2024 My Portfolio</p>
+    </footer>
+</body>
+</html>

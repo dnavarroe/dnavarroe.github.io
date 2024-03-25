@@ -1,0 +1,364 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/proyecto_one.css">
+    <link rel='shortcut icon' href="../Icons/icon.png">
+    <title>My Portfolio - Daniel Esteban Navarro Espinosa</title>
+</head>
+<body>
+    <header>
+        <div>
+            <div class="name">
+                <h1>Daniel Navarro</h1>
+                <p>Data Analyst</p>
+            </div>
+            <nav>
+                <ul>
+                    <li class="nav"><a class="navi" href="../index.html">Home</a></li>
+                    <li class="nav"><a class="navi" href="projects.html">Projects</a></li>
+                    <li class="nav"><a class="navi" href="about.html">About & Contact</a></li>
+                </ul>  
+            </nav>
+        </div>
+    </header>
+    <div class="cuerpo">
+        <div class="titulo">
+            <h1>Exploratory data analysis with python</h1>
+        </div>
+        <div class="subtitulo">
+            <h2>Project description</h2>
+        </div>
+        <div class="descripcion">
+            <p>Conduct a comprehensive Exploratory Data Analysis (EDA) on the dataset to unveil meaningful insights, 
+                patterns, and trends. Utilize descriptive statistics and visualizations to effectively communicate key
+                 findings, facilitating a deeper understanding of the data's characteristics. The goal is to provide 
+                 actionable information that can inform decision-making processes and support future analytical endeavors.</p>
+        </div>
+        <div class="subtitulo">
+            <h2>The business problem</h2>
+        </div>
+        <div class="parrafo">
+            A banking institution hires a marketing company to contact potential customers via telephone to determine whether they 
+            are interested in acquiring a term deposit certificate with the bank.
+            What is the profile of customers with the highest conversion potential?
+        </div>
+        <div class="subtitulo">
+            <h2>Dataset</h2>
+        </div>
+        <div class="parrafo">
+            <p>The information collected by the marketing company is stored in a CSV file dataset_bank.csv with 45,189 rows and 17 columns.
+                <br>
+                <br>
+                Each record contains 16 features (the first 16 columns) and a category ("yes" or "no" depending on whether the person is interested in 
+                acquiring the product). The columns are:
+            </p>
+        </div>
+        <div class="parrafo">
+            <p>
+                <b>1."age"</b>: age (numeric)
+                <br>
+                <br>
+                <b>2."job"</b>: type of job (categorical: "admin.", "unknown", "unemployed", "management", "housemaid", "entrepreneur", "student", "blue-collar", "self-employed", "retired", "technician", "services")
+                <br>
+                <br>
+                <b>3."marital"</b>: marital status (categorical: "married", "divorced", "single")
+                <br>
+                <br>
+                <b>4."education"</b>: educational level (categorical: "unknown", "secondary", "primary", "tertiary")
+                <br>
+                <br>
+                <b>5."default"</b>: whether the person has defaulted on their obligations (categorical: "yes", "no")
+                <br>
+                <br>
+                <b>6."balance"</b>: average annual balance in euros (numeric)
+                <br>
+                <br>
+                <b>7."housing"</b>: whether the person has a housing loan or not (categorical: "yes", "no")
+                <br>
+                <br>
+                <b>8."loan"</b>: age (numeric)
+                <br>
+                <br>
+                <b>9."contact"</b>: type of job (categorical: "admin.", "unknown", "unemployed", "management", "housemaid", "entrepreneur", "student", "blue-collar", "self-employed", "retired", "technician", "services")
+                <br>
+                <br>
+                <b>10."day"</b>: marital status (categorical: "married", "divorced", "single")
+                <br>
+                <br>
+                <b>11."month"</b>: educational level (categorical: "unknown", "secondary", "primary", "tertiary")
+                <br>
+                <br>
+                <b>12."duration"</b>: whether the person has defaulted on their obligations (categorical: "yes", "no")
+                <br>
+                <br>
+                <b>13."campaign"</b>: average annual balance in euros (numeric)
+                <br>
+                <br>
+                <b>14."pdays"</b>: whether the person has a housing loan or not (categorical: "yes", "no")
+                <br>
+                <br>
+                <b>15."previous"</b>: educational level (categorical: "unknown", "secondary", "primary", "tertiary")
+                <br>
+                <br>
+                <b>16."poutcome"</b>: whether the person has defaulted on their obligations (categorical: "yes", "no")
+                <br>
+                <br>
+                <b>17."y"</b>: average annual balance in euros (numeric)
+            </p>
+        </div>
+        <div class="subtitulo">
+            <h2>Reading the dataset</h2>
+        </div>
+        <div class="parrafo">
+            <p>
+                Import the libraries that we are going to use to work with the dataset and the visualization libraries
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto1/photo1.png">
+        </div>
+        <div class="parrafo">
+            <p>
+                Now we give permission to drive and using panda we read our dataset
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto1/photo2.png">
+        </div>
+        <div class="parrafo">
+            <p>
+                We can see the first 5 rows of our dataset
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto1/photo3.png">
+        </div>
+        <div class="photo">
+            <img src="../proyecto1/photo4.png">
+        </div>
+        <div class="subtitulo">
+            <h2>Exploratory analysis</h2>
+        </div>
+        <div class="parrafo">
+            <p>
+                The idea is to use statistical and visualization tools to:
+                <br>
+                <ul>
+                    <li>Create a mind map of the dataset (understand it)</li>
+                    <br>
+                    <li>Start finding answers to the question initially posed (what profile do the customers with the greatest conversion potential have?)</li>
+                </ul>
+                We will carry out these phases:
+                <br>
+                <ol>
+                    <li>Analysis of each variable individually</li>
+                    <br>
+                    <li>Univariate analysis: relationship of each predictor variable with the variable to be predicted</li>
+                    <br>
+                    <li>Bivariate analysis: relationship of pairs of predictor variables with the variable to be predicted</li>
+                </ol>
+            </p>
+        </div>
+        <div class="subtitulo">
+            <h2>Analysis of each variable individually</h2>
+        </div>
+        <div class="parrafo">
+            <p>
+                begin to analyze each variable separately, this allows us to understand the general characteristics of each variable in our dataset.
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto1/photo5.png">
+        </div>
+        <div class="parrafo">
+            <p>Let's take the categorical variables and generate bar charts to count.</p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto1/photo6.png">
+        </div>
+        <div class="variasfotos">
+        
+                <div class="photo">
+                    <img src="../proyecto1/photo7.png">
+                </div>
+                <div class="photo">
+                    <img src="../proyecto1/photo8.png">
+                </div>
+                <div class="photo">
+                    <img src="../proyecto1/photo9.png">
+                </div>
+                <div class="photo">
+                    <img src="../proyecto1/photo10.png">
+                </div>
+                <div class="photo">
+                    <img src="../proyecto1/photo11.png">
+                </div>
+        
+       
+                <div class="photo">
+                    <img src="../proyecto1/photo12.png">
+                </div>
+                <div class="photo">
+                    <img src="../proyecto1/photo13.png">
+                </div>
+                <div class="photo">
+                    <img src="../proyecto1/photo14.png">
+                </div>
+                <div class="photo">
+                    <img src="../proyecto1/photo15.png">
+                </div>
+                <div class="photo">
+                    <img src="../proyecto1/photo16.png">
+                </div>
+        </div>
+        <div class="subtitulo">
+            <h2>Observations:</h2>
+        </div>
+        <div class="parrafo">
+            <p>Levels of each variable of interest:</p>
+            <li>'job': 12</li>
+            <br>
+            <li>'marital': 3 (married, single, divorced)</li>
+            <br>
+            <li>'education': 4 (primary, secondary, tertiary, unknown)</li>
+            <br>
+            <li>'default': 2 (Yes, No). In this case, the vast majority of contacts have 'No' values.</li>
+            <br>
+            <li>'housing': 2 (Yes, No). In this case, the set is relatively balanced.</li>
+            <br>
+            <li>'loan': 2 (Yes, No). In this case, the vast majority contains 'No' values.</li>
+            <br>
+            <li>'poutcome': 4 (unknown, failure, other, success). The majority is at the 'unknown' level.</li>
+            <br>
+            <li>'y': 2 (No, Yes). The majority is at the 'No' level. If a predictive model with Machine Learning is implemented later on, this imbalance should be taken into account.</li>
+            <p>Let's remove the columns "contact", "month", "day", "duration", "campaign", "pdays", and "previous" as they do not provide information about the client.</p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto1/photo17.png">
+        </div>
+        <div class="parrafo">
+            <p>
+            Let's initially examine the behavior of the numerical variables ('age' and 'balance').
+            <br>
+            <br>
+            We can extract some basic descriptive statistical variables.
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto1/photo18.png">
+        </div>
+        <div class="parrafo">
+            <p>But often, it is more useful to visualize these variables through graphs.</p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto1/photo19.png">
+        </div>
+        <div class="photo">
+            <img src="../proyecto1/photo19-1.png">
+        </div>
+        <div class="parrafo">
+            <p>Let's examine in detail what happens with the balance.</p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto1/photo20.png">
+        </div>
+        <div class="subtitulo">
+            <h2>Observations:</h2>
+        </div>
+        <div class="parrafo">
+            <p>
+                <ul>
+                    <li>The majority of the contacted group falls within the age range of 30 to 50 years, with a bias towards 30-40 years.</li>
+                    <br>
+                    <li>The majority of the contacted group (75%) has balances either in the negative or do not exceed approximately 1500 euros.</li>
+                </ul>
+            </p>
+        </div>
+        <div class="parrafo">
+            <p>Let's start the bivariate analysis. To review the univariate analysis part, you can download the Python notebook.</p>
+        </div>    
+        <div class="subtitulo">
+            <h2>Bivariate analysis</h2>
+        </div>
+        <div class="parrafo">
+            <p>
+                Can take it a step further in this exploratory analysis by examining potential interactions between pairs of predictor variables and their impact on the variable to predict.
+                <br>
+                <br>
+                This is known as bivariate analysis.
+                <br>
+                <br>
+                Since there are many possible combinations, we will only analyze pairs with higher potential based on the order of importance defined in the summary of the univariate analysis.
+                <br>
+                <br>
+                The simplest way to conduct this analysis is through graphs (although more sophisticated statistical tools could also be used).
+                <br>
+                <br>
+                ⚠️⚠️⚠️ WARNING ⚠️⚠️⚠️
+                <br>
+                <br>
+                Similar to univariate analysis, this analysis will show us only one aspect of the possible relationships between pairs of predictor variables and the variable to predict. It is not sufficient to draw definitive conclusions (although it will provide a more detailed insight compared to univariate analysis).
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto1/photo21.png">
+        </div>
+        <div class="photo">
+            <img src="../proyecto1/photo22.png">
+        </div>
+        <div class="photo">
+            <img src="../proyecto1/photo23.png">
+        </div>
+        <div class="photo">
+            <img src="../proyecto1/photo24.png">
+        </div>
+        <div class="photo">
+            <img src="../proyecto1/photo25.png">
+        </div>
+        <div class="photo">
+            <img src="../proyecto1/photo26.png">
+        </div>
+        <div class="subtitulo">
+            <h2>Conclusions:</h2>
+        </div>
+        <div class="parrafo">
+            <p>
+                The variable "poutcome," followed by the variables "job," "balance_groups," and "age_groups," are the ones that have the greatest impact on the conversion rate.
+                <br>
+                With this analysis, the ideal customer profile would be:
+                <br>
+                <br>
+                <ul>
+                    <li>They must have been contacted previously by the bank and must have previously acquired the product (poutcome == success).</li>
+                    <br>
+                    <li>Occupational profile (top-3): unemployed, student, retired.</li>
+                    <br>
+                    <li>Balance in their bank account: between 16K and 20K (preferably).</li>
+                    <br>
+                    <li>Age: between 18 and 25 years (preferably).</li>
+                    <br>
+                    <li>Should not have consumer credit, mortgage credit, or have defaulted.</li>
+                </ul>
+                It is possible that the combination of more than two variables (multivariate analysis) sheds more light on these profiles. However, in this case, the interpretation of results becomes more challenging as we simultaneously analyze more and more variables.
+                <br>
+                <br>
+                At this point, the next step would be to use a Machine Learning model that allows for finding patterns that are not easily visible with this exploratory analysis.
+            </p>
+        
+        </div>
+        <div class="subtitulo">
+            <h2>Download notebook: <a href="../archivos/Analisis_exploratorio_de_datos.ipynb">Analisis_exploratorio_de_datos.ipynb</a></h2>
+        </div>
+        <div class="subtitulo">
+            <a href="https://drive.google.com/file/d/1Zc-cyP5Jae2op5iNurG4gyY3ofAJ2nrr/view?usp=sharing"><h2>See notebook online</h2></a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 My Portfolio</p>
+    </footer>
+</body>
+</html>

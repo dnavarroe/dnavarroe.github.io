@@ -1,0 +1,416 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/proyecto_one.css">
+    <link rel='shortcut icon' href="../Icons/icon.png">
+    <title>My Portfolio - Daniel Esteban Navarro Espinosa</title>
+</head>
+<body>
+    <header>
+        <div>
+            <div class="name">
+                <h1>Daniel Navarro</h1>
+                <p>Data Analyst</p>
+            </div>
+            <nav>
+                <ul>
+                    <li class="nav"><a class="navi" href="../index.html">Home</a></li>
+                    <li class="nav"><a class="navi" href="projects.html">Projects</a></li>
+                    <li class="nav"><a class="navi" href="about.html">About & Contact</a></li>
+                </ul>  
+            </nav>
+        </div>
+    </header>
+    <div class="cuerpo">
+        <div class="titulo">
+            <h1>Time-Series Prediction</h1>
+        </div>
+        <div class="subtitulo">
+            <h2>Project description</h2>
+        </div>
+        <div class="descripcion">
+            <p>The project tries to predict the future weather of a city using weather-data from several other cities. 
+                Because we will be working with sequences of arbitrary length, we will use a Recurrent Neural Network (RNN).</p>
+        </div>
+        <div class="subtitulo">
+            <h2>Location</h2>
+        </div>
+        <div class="parrafo">
+            We will use weather-data from the period 1980-2018 for five cities in Denmark:
+            <br>
+            <ul>
+                <li><b>Aalborg</b> The weather-data is actually from an airforce base which is also home to The Hunter Corps (Jægerkorps).</li>
+                <br>
+                <li><b>Aarhus</b> is the city where the inventor of C++ studied and the Google V8 JavaScript Engine was developed.</li>
+                <br>
+                <li><b>Esbjerg</b> has a large fishing-port.</li>
+                <br>
+                <li><b>Odense</b> is the birth-city of the fairytale author H. C. Andersen.</li>
+                <br>
+                <li><b>Roskilde</b> has an old cathedral housing the tombs of the Danish royal family.</li>
+            </ul>
+        </div>
+        <div class="parrafo">
+            <p>The following map shows the location of the cities in Denmark:</p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo1.png">
+        </div>
+        <div class="parrafo">
+            <p>The following map shows the location of Denmark within Europe:</p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo2.png">
+        </div>
+        <div class="subtitulo">
+            <h2>Flowchart</h2>
+        </div>
+        <div class="parrafo">
+            <p>We are trying to predict the weather for the Danish city "Odense" 24 hours into the future, 
+                given the current and past weather-data from 5 cities (although the flowchart below only shows 2 cities).
+                <br>
+                <br>
+                We use a Recurrent Neural Network (RNN) because it can work on sequences of arbitrary length. 
+                During training we will use sub-sequences of 1344 data-points (8 weeks) from the training-set, 
+                with each data-point or observation having 20 input-signals for the temperature, pressure, etc. 
+                for each of the 5 cities. We then want to train the neural network so it outputs the 3 signals 
+                for tomorrow's temperature, pressure and wind-speed.
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo3.png">
+        </div>
+        <div class="subtitulo">
+            <h2>Imports</h2>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo4.png">
+        </div>
+        <div class="parrafo">
+            <p>We need to import several things from Keras.</p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo5.png">
+        </div>
+        <div class="subtitulo">
+            <h2>Load Data</h2>
+        </div>
+        <div class="parrafo">
+            <p>
+                Weather-data for 5 cities in Denmark will be downloaded automatically below.
+                <br>
+                <br>
+                The raw weather-data was originally obtained from the National Climatic Data Center (NCDC),
+                 USA. Their web-site and database-access is very confusing and may change soon. 
+                 Furthermore, the raw data-file had to be manually edited before it could be read. 
+                 So you should expect some challenges if you want to download weather-data for another 
+                 region. The following Python-module provides some functionality that may be helpful if 
+                 you want to use new weather-data, but you will have to modify the source-code to fit your data-format.
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo6.png">
+        </div>
+        <div class="parrafo">
+            <p>
+                Download the data-set if you don't have it already. It is about 35 MB.
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo7.png">
+        </div>
+        <div class="parrafo">
+            <p>
+                List of the cities used in the data-set.
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo8.png">
+        </div>
+        <div class="parrafo">
+            <p>
+                Load and resample the data so it has observations at regular time-intervals for every 
+                60 minutes. Missing data-points are linearly interpolated. This takes about 30 seconds 
+                to run the first time but uses a cache-file so it loads very quickly the next time.
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo9.png">
+        </div>
+        <div class="subtitulo">
+            <h2>The steps to prepare the data can be seen in the notebook</h2>
+        </div>
+        <div class="subtitulo">
+            <h2>Create the Recurrent Neural Network</h2>
+        </div>
+        <div class="parrafo">
+            <p>
+                We are now ready to create the Recurrent Neural Network (RNN). We will use the Keras API for this because of its simplicity.
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo10.png">
+        </div>
+        <div class="parrafo">
+            <p>We can now add a Gated Recurrent Unit (GRU) to the network. This will have 512 outputs for each time-step in the sequence.
+                <br>
+                <br>
+                Note that because this is the first layer in the model, Keras needs to know the shape of its input, which is a batch of sequences of arbitrary length (indicated by None), where each observation has a number of input-signals (num_x_signals).
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo11.png">
+        </div>
+        <div class="parrafo">
+            <p>The GRU outputs a batch of sequences of 512 values. We want to predict 3 output-signals, so we add a fully-connected (or dense) layer which maps 512 values down to only 3 values.
+                <br>
+                <br>
+                The output-signals in the data-set have been limited to be between 0 and 1 using a scaler-object. So we also limit the output of the neural network using the Sigmoid activation function, which squashes the output to be between 0 and 1.
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo12.png">
+        </div>
+        <div class="parrafo">
+            <p>A problem with using the Sigmoid activation function, is that we can now only output values in the same range as the training-data.
+                <br>
+                <br>
+                For example, if the training-data only has temperatures between -20 and +30 degrees, then the scaler-object will map -20 to 0 and +30 to 1. So if we limit the output of the neural network to be between 0 and 1 using the Sigmoid function, this can only be mapped back to temperature values between -20 and +30.
+                <br>
+                <br>
+                We can use a linear activation function on the output instead. This allows for the output to take on arbitrary values. It might work with the standard initialization for a simple network architecture, but for more complicated network architectures e.g. with more layers, it might be necessary to initialize the weights with smaller values to avoid NaN values during training. You may need to experiment with this to get it working.
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo13.png">
+        </div>
+        <div class="subtitulo">
+            <h2>Loss Function</h2>
+        </div>
+        <div class="parrafo">
+            <p>We will use Mean Squared Error (MSE) as the loss-function that will be minimized. This measures how closely the model's output matches the true output signals.
+                <br>
+                <br>
+                However, at the beginning of a sequence, the model has only seen input-signals for a few time-steps, so its generated output may be very inaccurate. Using the loss-value for the early time-steps may cause the model to distort its later output. We therefore give the model a "warmup-period" of 50 time-steps where we don't use its accuracy in the loss-function, in hope of improving the accuracy for later time-steps.
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo14.png">
+        </div>
+        <div class="subtitulo">
+            <h2>Compile Model</h2>
+        </div>
+        <div class="parrafo">
+            <p>This is the optimizer and the beginning learning-rate that we will use.</p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo15.png">
+        </div>
+        <div class="parrafo">
+            <p>We then compile the Keras model so it is ready for training.</p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo16.png">
+        </div>
+        <div class="parrafo">
+            <p>This is a very small model with only two layers. The output shape of (None, None, 3) 
+                means that the model will output a batch with an arbitrary number of sequences, 
+                each of which has an arbitrary number of observations, and each observation has 3 signals. 
+                This corresponds to the 3 target signals we want to predict.
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo17.png">
+        </div>
+        <div class="subtitulo">
+            <h2>Callback Functions</h2>
+        </div>   
+        <div class="parrafo">
+            <p>
+                During training we want to save checkpoints and log the progress to TensorBoard so we create the appropriate callbacks for Keras.
+                <br>
+                <br>
+                This is the callback for writing checkpoints during training.
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo18.png">
+        </div>
+        <div class="parrafo">
+            <p>This is the callback for stopping the optimization when performance worsens on the validation-set.
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo19.png">
+        </div>
+        <div class="parrafo">
+            <p>This is the callback for writing the TensorBoard log during training.
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo20.png">
+        </div>
+        <div class="parrafo">
+            <p>This callback reduces the learning-rate for the optimizer if the validation-loss has not improved since the last epoch (as indicated by patience=0). The learning-rate will be reduced by multiplying it with the given factor. We set a start learning-rate of 1e-3 above, so multiplying it by 0.1 gives a learning-rate of 1e-4. We don't want the learning-rate to go any lower than this.</p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo21.png">
+        </div>
+        <div class="subtitulo">
+            <h2>Train the Recurrent Neural Network</h2>
+        </div> 
+        <div class="parrafo">
+            <p>
+                We can now train the neural network.
+                <br>
+                <br>
+                Note that a single "epoch" does not correspond to a single processing of the training-set, because of how the batch-generator randomly selects sub-sequences from the training-set. Instead we have selected steps_per_epoch so that one "epoch" is processed in a few minutes.
+                <br>
+                <br>
+                With these settings, each "epoch" took about 2.5 minutes to process on a GTX 1070. After 14 "epochs" the optimization was stopped because the validation-loss had not decreased for 5 "epochs". This optimization took about 35 minutes to finish.
+                <br>
+                <br>
+                Also note that the loss sometimes becomes NaN (not-a-number). This is often resolved by restarting and running the Notebook again. But it may also be caused by your neural network architecture, learning-rate, batch-size, sequence-length, etc. in which case you may have to modify those settings.
+
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo22.png">
+        </div>
+        <div class="subtitulo">
+            <h2>Load Checkpoint</h2>
+        </div>
+        <div class="parrafo">
+            <p>Because we use early-stopping when training the model, it is possible that the model's performance has worsened on the test-set for several epochs before training was stopped. We therefore reload the last saved checkpoint, which should have the best performance on the test-set.</p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo23.png">
+        </div>
+        <div class="subtitulo">
+            <h2>Performance on Test-Set</h2>
+        </div>
+        <div class="parrafo">
+            <p>We can now evaluate the model's performance on the test-set. This function expects a batch of data, but we will just use one long time-series for the test-set, so we just expand the array-dimensionality to create a batch with that one sequence.</p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo24.png">
+        </div>
+        <div class="subtitulo">
+            <h2>Generate Predictions</h2>
+        </div>
+        <div class="parrafo">
+            <p>This helper-function plots the predicted and true output-signals.</p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo25.png">
+        </div>
+        <div class="parrafo">
+            <p>
+                We can now plot an example of predicted output-signals. It is important to understand what these plots show, as they are actually a bit more complicated than you might think.
+                <br>
+                <br>
+                These plots only show the output-signals and not the 20 input-signals used to predict the output-signals. The time-shift between the input-signals and the output-signals is held fixed in these plots. The model always predicts the output-signals e.g. 24 hours into the future (as defined in the shift_steps variable above). So the plot's x-axis merely shows how many time-steps of the input-signals have been seen by the predictive model so far.
+                <br>
+                <br>
+                The prediction is not very accurate for the first 30-50 time-steps because the model has seen very little input-data at this point. The model generates a single time-step of output data for each time-step of the input-data, so when the model has only run for a few time-steps, it knows very little of the history of the input-signals and cannot make an accurate prediction. The model needs to "warm up" by processing perhaps 30-50 time-steps before its predicted output-signals can be used.
+                <br>
+                <br>
+                That is why we ignore this "warmup-period" of 50 time-steps when calculating the mean-squared-error in the loss-function. The "warmup-period" is shown as a grey box in these plots.
+                <br>
+                <br>
+                Let us start with an example from the training-data. This is data that the model has seen during training so it should perform reasonably well on this data.
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo26.png">
+        </div>
+        <div class="parrafo">
+            <p>The model was able to predict the overall oscillations of the temperature quite well but the peaks were sometimes inaccurate. For the wind-speed, the overall oscillations are predicted reasonably well but the peaks are quite inaccurate. For the atmospheric pressure, the overall curve-shape has been predicted although there seems to be a slight lag and the predicted curve has a lot of noise compared to the smoothness of the original signal.   
+            </p>
+        </div>
+        <div class="subtitulo">
+            <h2>Strange Example</h2>
+        </div>
+        <div class="parrafo">
+            <p>
+                The following is another example from the training-set.
+                <br>
+                <br>
+                Note how the temperature does not oscillate very much within each day (this plot shows almost 42 days). The temperature normally oscillates within each day, see e.g. the plot above where the daily temperature-oscillation is very clear. It is unclear whether this period had unusually stable temperature, or if perhaps there's a data-error.
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo27.png">
+        </div>
+        <div class="parrafo">
+            <p>
+                As a check, we can plot this signal directly from the resampled data-set, which looks similar.
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo28.png">
+        </div>
+        <div class="parrafo">
+            <p>
+                We can plot the same period from the original data that has not been resampled. It also looks similar.
+                <br>
+                <br>
+                So either the temperature was unusually stable for a part of this period, or there is a data-error in the raw data that was obtained from the internet weather-database.
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo29.png">
+        </div>
+        <div class="subtitulo">
+            <h2>Example from Test-Set</h2>
+        </div>
+        <div class="parrafo">
+            <p>
+                Now consider an example from the test-set. The model has not seen this data during training.
+                <br>
+                <br>
+                The temperature is predicted reasonably well, although the peaks are sometimes inaccurate.
+                <br>
+                <br>
+                The wind-speed has not been predicted so well. The daily oscillation-frequency seems to match, but the center-level and the peaks are quite inaccurate. A guess would be that the wind-speed is difficult to predict from the given input data, so the model has merely learnt to output sinusoidal oscillations in the daily frequency and approximately at the right center-level.
+                <br>
+                <br>
+                The atmospheric pressure is predicted reasonably well, except for a lag and a more noisy signal than the true time-series.
+            </p>
+        </div>
+        <div class="photo">
+            <img src="../proyecto3/photo30.png">
+        </div>
+
+        <div class="subtitulo">
+            <h2>Conclusion</h2>
+        </div>
+        <div class="parrafo">
+            <p>
+                This project showed how to use a Recurrent Neural Network to predict several time-series from a number of input-signals. We used weather-data for 5 cities to predict tomorrow's weather for one of the cities.
+                <br>
+                <br>
+                It worked reasonably well for predicting the temperature where the daily oscillations were predicted well, but the peaks were sometimes not predicted so accurately. The atmospheric pressure was also predicted reasonably well, although the predicted signal was more noisy and had a short lag. The wind-speed could not be predicted very well.
+                <br>
+                <br>
+                You can use this method with different time-series but you should be careful to distinguish between causation and correlation in the data. The neural network may easily discover patterns in the data that are only temporary correlations which do not generalize well to unseen data.
+                <br>
+                <br>
+                You should select input- and output-data where a causal relationship probably exists. You should have a lot of data available for training, and you should try and reduce the risk of over-fitting the model to the training-data, e.g. using early-stopping as we did in this project.
+            </p>
+        </div>
+        <div class="subtitulo">
+            <h2>Download notebook: <a href="../archivos/Time_Series_Prediction.ipynb">Time_Series_Prediction.ipynb</a></h2>
+        </div>
+        <div class="subtitulo">
+            <a href="https://drive.google.com/file/d/1fW8GGCzNPgdFE-erX8PJk0K7s_VwIprq/view?usp=sharing"><h2>See notebook online</h2></a>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 My Portfolio</p>
+    </footer>
+</body>
+</html>
